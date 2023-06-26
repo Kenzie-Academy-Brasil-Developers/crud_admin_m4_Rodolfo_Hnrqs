@@ -5,11 +5,7 @@ const verifyUserPermission = async (req: Request, res: Response, next: NextFunct
     const { userId } = req.params;
     const { sub, admin } = res.locals.decoded;
 
-    if (!admin) {
-        throw new AppError("Insufficient permission", 403);
-    };
-
-    if (userId !== sub) {
+    if (!admin && userId !== sub) {
         throw new AppError("Insufficient permission", 403);
     }
 
